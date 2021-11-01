@@ -149,3 +149,39 @@ const ColorfulMessage = (props) => {
 
 export default ColorfulMessage
 ```
+
+## PropsとState
+
++ コンポーネント<br>
+  =>画面要素の1単位。大(1画面)から小(1つのテキストボックス)まで様々。<br>
+
++ Props<br>
+  =>コンポーネントに渡される引数的なもの<br>
+
++ State<br>
+  =>各コンポーネントが持つ状態。Stateが変更されると再レンダリングされる。<br>
+
+`App.jsx`<br>
+
+```
+import React, { useState } from 'react'
+import ColorfulMessage from './components/ColorfulMessage'
+
+const App = () => {
+  const onClickCountUp = () => {
+    setNum(num + 1)
+  }
+  const [num, setNum] = useState(0) // 配列の分割代入 [num, setNum] numをいう変数をそれを更新していくsetNumという関数名、useDate()に初期値を入れられる
+  return (
+    <>
+      <h1 style={{ color: 'red' }}>こんにちは!</h1>
+      <ColorfulMessage color="blue">お元気ですか？</ColorfulMessage>
+      <ColorfulMessage color="pink">元気です！</ColorfulMessage>
+      <button onClick={onClickCountUp}>カウントアップ</button>
+      <p>{num}</p>
+    </>
+  )
+}
+
+export default App
+```
