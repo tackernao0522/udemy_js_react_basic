@@ -1,9 +1,9 @@
-/* eslint react-hooks/exhaustive-deps: off */
+// /* eslint react-hooks/exhaustive-deps: off */
 import React, { useEffect, useState } from 'react'
-import ColorfulMessage from './components/ColorfulMessage'
+import { ColorfulMessage } from './components/ColorfulMessage'
 
 const App = () => {
-  console.log('さいしょ')
+  // console.log('さいしょ')
   const [num, setNum] = useState(0) // 配列の分割代入 [num, setNum] numをいう変数をそれを更新していくsetNumという関数名、useDate()に初期値を入れられる
   const [faceShowFlag, setFaceShowFlag] = useState(false)
 
@@ -13,6 +13,7 @@ const App = () => {
 
   const onClickSwitchShowFlag = () => {
     // setFaceShowFlag(faceShowFlag ? false : true)
+    // クリックするとfalseに書き換え(更新)
     setFaceShowFlag(!faceShowFlag)
   }
 
