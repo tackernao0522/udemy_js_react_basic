@@ -683,7 +683,7 @@ export const App = () => {
   const onClickAdd = () => {
     // テキストボックスが未入力のまま追加ボタンを押したら追加できないようにする
     if (todoText === "") {
-      alert('未入力です。')
+      return alert('未入力です。')
     }
     // alert(todoText)
     const newTodos = [...inCompleteTodos, todoText]
