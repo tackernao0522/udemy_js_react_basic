@@ -11,10 +11,17 @@ export const App = () => {
     if (todoText === "") {
       return alert('未入力です。')
     }
-    // alert(todoText)
-    const newTodos = [...inCompleteTodos, todoText]
+    // console.log(todoText)
+    const newTodos = [...inCompleteTodos, todoText] // 配列の結合 ...inCompleteTodosは ああああ, いいいいであり配列ではなく値が拾えている ...がないと配列の型で拾うことになる
     setInCompleteTodos(newTodos)
     setTodoText('') // Todoタスクを追加したらテキストボックスの中の値を空にする
+  }
+
+  const onClickDelete = (index) => {
+    const newTodos = [...inCompleteTodos]
+    newTodos.splice(index, 1) // 第一引数に何番目の要素か？第二引数に幾つの要素を削除するかを入れる
+    setInCompleteTodos(newTodos)
+    // alert(index)
   }
 
   return (
@@ -27,12 +34,13 @@ export const App = () => {
         <p className="title">未完了のTODO</p>
         <ul>
           {/* map等を使用してレンダリングする場合はkeyは必須である */}
-          {inCompleteTodos.map((todo) => {
+          {inCompleteTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                {/* アロー関数を挿入してここの時点でonClickDelete関数が実行されないようにする */}
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             )
           })}
