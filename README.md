@@ -611,3 +611,57 @@ li {
   padding-bottom: 4px;
 }
 ```
+
+## App.jsxをuseStateとmapを使用したモックに変更
+
+```
+import React, { useState } from 'react' // 編集
+import './App.css'
+
+export const App = () => {
+  const [inCompleteTodos, setInCompleteTodos] = useState(['ああああ', 'いいいい']) // 追記
+
+  const [completeTodos, setCompleteTodos] = useState(['うううう']) // 追記
+
+  return (
+    <>
+      <div className="input-area">
+        <input placeholder="TODOを入力" />
+        <button>追加</button>
+      </div>
+      <div className="incomplete-area">
+        <p className="title">未完了のTODO</p>
+        <ul>
+          // ここから編集
+          {/* map等を使用してレンダリングする場合はkeyは必須である */}
+          {inCompleteTodos.map((todo) => {
+            return (
+              <div key={todo} className="list-row">
+                <li>{todo}</li>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            )
+          })}
+          // ここまで
+        </ul>
+      </div>
+      <div className="complete-area">
+        <p className="title">完了のTODO</p>
+        <ul>
+            // ここから編集
+            {completeTodos.map((todo) => {
+              return (
+                <div key={todo} className="list-row"> {/* keyを忘れないようにすること */}
+                  <li>{todo}</li>
+                  <button>戻す</button>
+                </div>
+              )
+            })}
+            // ここまで
+        </ul>
+      </div>
+    </>
+  )
+}
+```
