@@ -2,15 +2,26 @@ import React, { useState } from 'react'
 import './App.css'
 
 export const App = () => {
+  const [todoText, setTodoText] = useState('') // テキストボックスの初期値を空にする
   const [inCompleteTodos, setInCompleteTodos] = useState(['ああああ', 'いいいい'])
-
   const [completeTodos, setCompleteTodos] = useState(['うううう'])
+  const onChangeTodoText = (event) => setTodoText(event.target.value) // event.target.valueはそのまま覚えても良い
+  const onClickAdd = () => {
+    // テキストボックスが未入力のまま追加ボタンを押したら追加できないようにする
+    if (todoText === "") {
+      return alert('未入力です。')
+    }
+    // alert(todoText)
+    const newTodos = [...inCompleteTodos, todoText]
+    setInCompleteTodos(newTodos)
+    setTodoText('') // Todoタスクを追加したらテキストボックスの中の値を空にする
+  }
 
   return (
     <>
       <div className="input-area">
-        <input placeholder="TODOを入力" />
-        <button>追加</button>
+        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
+        <button onClick={onClickAdd}>追加</button>
       </div>
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
