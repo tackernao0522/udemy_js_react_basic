@@ -3,8 +3,8 @@ import './App.css'
 
 export const App = () => {
   const [todoText, setTodoText] = useState('') // テキストボックスの初期値を空にする
-  const [inCompleteTodos, setInCompleteTodos] = useState(['ああああ', 'いいいい'])
-  const [completeTodos, setCompleteTodos] = useState(['うううう'])
+  const [inCompleteTodos, setInCompleteTodos] = useState([])
+  const [completeTodos, setCompleteTodos] = useState([])
   const onChangeTodoText = (event) => setTodoText(event.target.value) // event.target.valueはそのまま覚えても良い
   const onClickAdd = () => {
     // テキストボックスが未入力のまま追加ボタンを押したら追加できないようにする
@@ -34,6 +34,16 @@ export const App = () => {
     setCompleteTodos(newCompleteTodo) // 完了後の完了リストの更新
   }
 
+  const onClickBack = (index) => {
+    // alert(index)
+    const newCompleteTodos = [...completeTodos]
+    newCompleteTodos.splice(index, 1)
+
+    const newInCompleteTodos = [...inCompleteTodos, completeTodos[index]]
+    setCompleteTodos(newCompleteTodos)
+    setInCompleteTodos(newInCompleteTodos)
+  }
+
   return (
     <>
       <div className="input-area">
@@ -59,11 +69,11 @@ export const App = () => {
       <div className="complete-area">
         <p className="title">完了のTODO</p>
         <ul>
-            {completeTodos.map((todo) => {
+            {completeTodos.map((todo, index) => {
               return (
                 <div key={todo} className="list-row"> {/* keyを忘れないようにすること */}
                   <li>{todo}</li>
-                  <button>戻す</button>
+                  <button onClick={() => onClickBack(index)}>戻す</button>
                 </div>
               )
             })}
