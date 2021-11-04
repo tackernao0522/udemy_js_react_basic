@@ -1279,7 +1279,7 @@ export const App = () => {
 
 ## コンポーネントの中にスタイルを入れる
 
-`InputTodo.jsx`の編集<br>
+`App.css`の編集<br>
 
 ```
 body {
@@ -1351,4 +1351,35 @@ li {
   padding-bottom: 4px;
 }
 
+```
+
+`InputTodo.jsx`の編集<br>
+
+```
+import React from 'react'
+
+// ここから追記
+const style= {
+  backgroundColor: '#c1ffff',
+  width: '400px',
+  height: '30px',
+  padding: '8px',
+  margin: '8px',
+  borderRadius: '8px',
+}
+// ここまで
+
+export const InputTodo = (props) => {
+  const { todoText, onChange, onClick } = props
+  return (
+    <div style={style}> // 編集
+      <input
+        placeholder="TODOを入力"
+        value={todoText}
+        onChange={onChange}
+      />
+      <button onClick={onClick}>追加</button>
+    </div>
+  )
+}
 ```
