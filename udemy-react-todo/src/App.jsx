@@ -11,7 +11,7 @@ export const App = () => {
   const onChangeTodoText = (event) => setTodoText(event.target.value) // event.target.valueはそのまま覚えても良い
   const onClickAdd = () => {
     // テキストボックスが未入力のまま追加ボタンを押したら追加できないようにする
-    if (todoText === "") {
+    if (todoText === '') {
       return alert('未入力です。')
     }
     // console.log(todoText)
@@ -49,9 +49,23 @@ export const App = () => {
 
   return (
     <>
-      <InputTodo todoText={todoText} onChange={onChangeTodoText} onClick={onClickAdd} />
-      <InCompleteTodos todos={inCompleteTodos} onClickComplete={onClickComplete} onClickDelete={onClickDelete} />
-      <CompleteTodos todos={completeTodos} onClickBack={onClickBack}  />
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+        disabled={inCompleteTodos.length >= 5}
+      />
+      {inCompleteTodos.length >= 5 && (
+        <p style={{ color: 'red' }}>
+          登録できるTodoは5個までです。削除するか完了してください。
+        </p>
+      )}
+      <InCompleteTodos
+        todos={inCompleteTodos}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
+      <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
     </>
   )
 }
