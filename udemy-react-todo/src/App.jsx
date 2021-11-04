@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import './App.css'
+import { InputTodo } from './components/InputTodo'
+import { InCompleteTodos } from './components/IncompleteTodos'
+import { CompleteTodos } from './components/CompleteTodos'
 
 export const App = () => {
   const [todoText, setTodoText] = useState('') // テキストボックスの初期値を空にする
@@ -46,39 +49,9 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
-      <div className="incomplete-area">
-        <p className="title">未完了のTODO</p>
-        <ul>
-          {/* map等を使用してレンダリングする場合はkeyは必須である */}
-          {inCompleteTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                {/* アロー関数を挿入してここの時点でonClickDelete関数が実行されないようにする */}
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            )
-          })}
-        </ul>
-      </div>
-      <div className="complete-area">
-        <p className="title">完了のTODO</p>
-        <ul>
-            {completeTodos.map((todo, index) => {
-              return (
-                <div key={todo} className="list-row"> {/* keyを忘れないようにすること */}
-                  <li>{todo}</li>
-                  <button onClick={() => onClickBack(index)}>戻す</button>
-                </div>
-              )
-            })}
-        </ul>
-      </div>
+      <InputTodo todoText={todoText} onChange={onChangeTodoText} onClick={onClickAdd} />
+      <InCompleteTodos todos={inCompleteTodos} onClickComplete={onClickComplete} onClickDelete={onClickDelete} />
+      <CompleteTodos todos={completeTodos} onClickBack={onClickBack}  />
     </>
   )
 }
