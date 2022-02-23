@@ -139,7 +139,7 @@ import React from 'react'
 
 const ColorfulMessage = (props) => {
   // console.log(props)
-  { color, children } = props //
+  const { color, children } = props //
   const contentStyle = {
     color, // プロパティと値の名前が同じのときは値は省略できる
     fontSize: '18px',
